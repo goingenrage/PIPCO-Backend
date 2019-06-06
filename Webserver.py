@@ -68,9 +68,10 @@ class Webserver:
                 max_logs = data.get('max_logs')
                 cliplength = data.get('cliplength')
                 log_enabled = data.get('log_enabled')
+                fr_log_enabled = data.get('fr_log_enabled')
                 cam_mode = data.get('cam_mode')
                 return response(json.dumps(self.data.change_settings(sensitivity, brightness, contrast, streamaddress,
-                                                                     global_notify, log_enabled, cliplength, max_logs, max_storage, cam_mode)))
+                                                                     global_notify, log_enabled, fr_log_enabled, cliplength, max_logs, max_storage, cam_mode)))
             else:
                 return response(json.dumps(self.data.get_settings(), cls=MessageEncoder))
         except Exception:

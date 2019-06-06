@@ -86,7 +86,7 @@ class PipcoDaten:
             return ret
 
     def change_settings(self, sensitivity=None, brightness=None, contrast=None, streamaddress=None, global_notify=None,
-                        log_enabled=None, cliplength=None, max_logs=None, max_storage=None, cam_mode=None):
+                        log_enabled=None, fr_log_enabled=None, cliplength=None, max_logs=None, max_storage=None, cam_mode=None):
         with self.__m_setting_lock:
             ret = {}
             if sensitivity is not None:
@@ -107,6 +107,9 @@ class PipcoDaten:
             if log_enabled is not None:
                 ret["log_enabled"] = log_enabled
                 self.__m_settings.log_enabled = bool(log_enabled)
+            if fr_log_enabled is not None:
+                ret["fr_log_enabled"] = fr_log_enabled
+                self.__m_settings.fr_log_enabled = bool(fr_log_enabled)
             if cliplength is not None:
                 ret["cliplength"] = cliplength
                 self.__m_settings.cliplength = int(cliplength)
@@ -220,13 +223,14 @@ class Log:
 
 class Settings:
     def __init__(self, sensitivity=0.0, brightness=0.0, contrast=0.5, streamaddress="", global_notify=True,
-                 log_enabled=True, cliplength=30, max_logs=5, max_storage=2048, cam_mode=0):
+                 log_enabled=True, fr_log_enabled=True, cliplength=30, max_logs=5, max_storage=2048, cam_mode=0):
         self.sensitivity = sensitivity
         self.streamaddress = streamaddress
         self.brightness = brightness
         self.contrast = contrast
         self.global_notify = global_notify
         self.log_enabled = log_enabled
+        self.fr_log_enabled = fr_log_enabled
         self.cliplength = cliplength
         self.max_logs = max_logs
         self.max_storage = max_storage
